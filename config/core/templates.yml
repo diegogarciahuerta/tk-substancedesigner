@@ -1,0 +1,96 @@
+# Copyright (c) 2015 Shotgun Software Inc.
+#
+# CONFIDENTIAL AND PROPRIETARY
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
+# Source Code License included in this distribution package. See LICENSE.
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
+# not expressly granted therein are reserved by Shotgun Software Inc.
+#
+
+# Author: Diego Garcia Huerta
+# Contact: https://www.linkedin.com/in/diegogh/
+#
+# YOU SHOULD MERGE these entries into your template.yml configuration file, as
+# THIS FILE BY ITSELF WILL NOT WORK
+# These are the additions to the template.yml to get the engine up and
+# running with the default tk-apps
+
+
+keys:
+    #
+    # Substance Designer
+    #
+    substancedesigner.texture_extension:
+        type: str
+        alias: extension
+
+    substancedesigner.channel:
+        type: str
+        alias: channel
+
+    substancedesigner.package.name:
+        type: str
+        alias: name
+
+    substancedesigner.graph.name:
+        type: str
+
+    substancedesigner.extension:
+        type: str
+        choices:
+            sbs: Substance Design File (.sbs)
+        default: sbs
+        alias: extension
+
+paths:
+    #
+    # Substance Designer
+    #
+
+    # asset
+    # define the location of the work area
+    asset_work_area_substancedesigner:
+        definition: '@asset_root/work/substancedesigner'
+        root_name: 'primary'
+
+    # define the location of the publish area
+    asset_publish_area_substancedesigner:
+        definition: '@asset_root/publish/substancedesigner'
+        root_name: 'primary'
+
+    # substancedesigner session snapshots
+    substancedesigner_asset_work:
+        definition: '@asset_work_area_substancedesigner/{substancedesigner.package.name}.v{version}.{substancedesigner.extension}'
+        root_name: 'primary'
+
+    # substancedesigner session snapshots
+    substancedesigner_asset_snapshot:
+        definition: '@asset_work_area_substancedesigner/snapshots/{substancedesigner.package.name}.v{version}.{timestamp}.{substancedesigner.extension}'
+        root_name: 'primary'
+
+    # substancedesigner package
+    substancedesigner_asset_package_publish:
+        definition: '@asset_publish_area_substancedesigner/{substancedesigner.package.name}.v{version}.{substancedesigner.extension}'
+        root_name: 'primary'
+
+    # substancedesigner SBSAR package
+    substancedesigner_asset_package_archive_publish:
+        definition: '@asset_publish_area_substancedesigner/{substancedesigner.package.name}.v{version}.sbsar'
+        root_name: 'primary'
+
+    # substancedesigner package as a preset
+    substancedesigner_asset_package_mdl_publish:
+        definition: '@asset_publish_area_substancedesigner/{substancedesigner.package.name}.v{version}.mdl'
+        root_name: 'primary'
+
+    # substancedesigner graph output textures
+    substancedesigner_asset_graph_textures_path_publish:
+        definition: '@asset_publish_area_substancedesigner/textures/{substancedesigner.package.name}/{substancedesigner.graph.name}/{Asset}_textures_v{version}'
+        root_name: 'primary'
+
+    # substancedesigner graph as mdle
+    substancedesigner_asset_graph_mdle_path_publish:
+        definition: '@asset_publish_area_substancedesigner/textures/{substancedesigner.package.name}/{substancedesigner.graph.name}/{Asset}_textures_v{version}.mdle'
+        root_name: 'primary'
